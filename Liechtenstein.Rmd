@@ -1,0 +1,41 @@
+---
+title: "Liechtenstein"
+output: ioslides_presentation
+date: "2024-01-19"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(leaflet)
+```
+
+```{r data, echo = FALSE}
+names <- c("Ruggell", "Schellenberg", "Gamprin/Bendern", "Mauren/Schaanwald", "Eschen/Nendeln",
+           "Planken", "Schaan", "Vaduz", "Triesenberg", "Triesen", "Balzers")
+
+pop <- c(2474, 1113, 1728, 4513, 4573, 
+         480, 6049, 5771, 2632, 5423, 4688)
+
+lat <- c(47.24147935426052, 47.23076045845552, 47.21295198167536, 47.21919000112176, 47.20502222476649, 
+          47.185659308980995, 47.16757309964608, 47.14089929127173, 47.118534342691206, 47.10948058086847, 47.06541643776143)
+
+lng <- c(9.525469277454544, 9.54557656069563, 9.502403723563553, 9.541285024689168, 9.525063024609475, 9.545319067573011, 9.512188422219369, 9.52154396670821, 9.543344961682951, 9.52480553322202, 9.50815437934399)
+
+fl_dataframe <- data.frame(names, pop, lng, lat)
+
+
+```
+
+## A tiny little country
+
+```{r map, echo = FALSE, message=FALSE}
+
+fl_dataframe %>% 
+        leaflet() %>%
+        addTiles() %>%
+        addMarkers(popup = names) %>%
+        addCircles(weight = 1, radius = sqrt(pop)*30)
+
+
+```
+
